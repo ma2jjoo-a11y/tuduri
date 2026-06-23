@@ -16,7 +16,8 @@
 
   <nav class="tab-bar">
     <button class="tab active" data-tab="today">오늘</button>
-    <button class="tab" data-tab="schedule">일정</button>
+    <button class="tab" data-tab="week">주간</button>
+    <button class="tab" data-tab="month">월간</button>
     <button class="tab" data-tab="tasks">할 일</button>
   </nav>
 
@@ -40,15 +41,28 @@
       </div>
     </section>
 
-    <!-- 일정 탭 -->
-    <section id="tab-schedule" class="tab-content">
-      <div class="section-title">2학기 주요 일정</div>
-      <div class="timeline" id="semester-timeline"></div>
-
-      <div class="section-title">Google 캘린더 일정</div>
-      <div id="calendar-events" class="event-list">
-        <div class="loading">Google 캘린더 연결 후 표시됩니다</div>
+    <!-- 주간 탭 -->
+    <section id="tab-week" class="tab-content">
+      <div class="cal-nav">
+        <button class="nav-btn" id="week-prev">‹</button>
+        <span class="cal-nav-title" id="week-title"></span>
+        <button class="nav-btn" id="week-next">›</button>
       </div>
+      <div id="week-view"></div>
+      <button class="fab" id="add-week-btn">+ 일정 추가</button>
+    </section>
+
+    <!-- 월간 탭 -->
+    <section id="tab-month" class="tab-content">
+      <div class="cal-nav">
+        <button class="nav-btn" id="month-prev">‹</button>
+        <span class="cal-nav-title" id="month-title"></span>
+        <button class="nav-btn" id="month-next">›</button>
+      </div>
+      <div id="month-grid"></div>
+      <div class="section-title" id="selected-day-title" style="display:none"></div>
+      <div id="selected-day-events" class="event-list"></div>
+      <button class="fab" id="add-month-btn">+ 일정 추가</button>
     </section>
 
     <!-- 할 일 탭 -->
@@ -57,10 +71,8 @@
         <div class="progress-label">트랙 소개 자료 진행률 <span id="progress-pct">0%</span></div>
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       </div>
-
       <div id="phase-list"></div>
-
-      <button class="fab" id="add-task-btn">+ 할 일 추가</button>
+      <button class="fab" id="add-task-btn">+ 일정 추가</button>
     </section>
   </main>
 
