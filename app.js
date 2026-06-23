@@ -236,20 +236,37 @@ document.getElementById('login-btn').addEventListener('click', () => {
 
 async function loadCalendarEvents() {
   const now = new Date();
+
+  // 이번 주 일요일 23:59:59 계산 (한국 기준 월~일)
+  const endOfWeek = new Date(now);
+  const dayOfWeek = now.getDay(); // 0=일, 1=월 ... 6=토
+  const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+  endOfWeek.setDate(now.getDate() + daysUntilSunday);
+  endOfWeek.setHours(23, 59, 59, 999);
+
   const twoWeeksLater = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
 
-  const resp = await gapi.client.calendar.events.list({
-    calendarId: 'primary',
-    timeMin: now.toISOString(),
-    timeMax: twoWeeksLater.toISOString(),
-    singleEvents: true,
-    orderBy: 'startTime',
-    maxResults: 20,
-  });
+  const [weekResp, allResp] = await Promise.all([
+    gapi.client.calendar.events.list({
+      calendarId: 'primary',
+      timeMin: now.toISOString(),
+      timeMax: endOfWeek.toISOString(),
+      singleEvents: true,
+      orderBy: 'startTime',
+      maxResults: 10,
+    }),
+    gapi.client.calendar.events.list({
+      calendarId: 'primary',
+      timeMin: now.toISOString(),
+      timeMax: twoWeeksLater.toISOString(),
+      singleEvents: true,
+      orderBy: 'startTime',
+      maxResults: 20,
+    }),
+  ]);
 
-  const events = resp.result.items || [];
-  renderCalendarEvents(events, 'week-events');
-  renderCalendarEvents(events, 'calendar-events');
+  renderCalendarEvents(weekResp.result.items || [], 'week-events');
+  renderCalendarEvents(allResp.result.items || [], 'calendar-events');
 }
 
 function renderCalendarEvents(events, containerId) {
