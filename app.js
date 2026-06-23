@@ -217,11 +217,22 @@ function gisLoaded() {
 
 function maybeEnableButtons() {
   if (!gapiInited || !gisInited) return;
-  document.getElementById('login-btn').addEventListener('click', () => {
-    if (gapi.client.getToken() === null) tokenClient.requestAccessToken({ prompt: 'consent' });
-    else loadCalendarEvents();
-  });
+  const btn = document.getElementById('login-btn');
+  btn.textContent = 'Google 캘린더 연결';
+  btn.disabled = false;
 }
+
+document.getElementById('login-btn').addEventListener('click', () => {
+  if (!gapiInited || !gisInited) {
+    alert('Google API 로딩 중이에요. 잠시 후 다시 눌러주세요.');
+    return;
+  }
+  if (gapi.client.getToken() === null) {
+    tokenClient.requestAccessToken({ prompt: 'consent' });
+  } else {
+    loadCalendarEvents();
+  }
+});
 
 async function loadCalendarEvents() {
   const now = new Date();
