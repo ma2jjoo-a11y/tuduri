@@ -1,6 +1,6 @@
 // Google API 설정 - Google Cloud Console에서 발급 후 아래에 입력
-const GOOGLE_CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
-const GOOGLE_API_KEY = 'YOUR_API_KEY_HERE';
+const GOOGLE_CLIENT_ID = '112150475059-0su7lvaksudsn8179rfiqdq17hbvjd0k.apps.googleusercontent.com';
+const GOOGLE_API_KEY = 'AIzaSyAx9kFA2Gn5OQiUOz3kDchmV2cxYzLWQ2U';
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
 // 학사 일정 데이터
