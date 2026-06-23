@@ -1,0 +1,21 @@
+{
+  "name": "투두리",
+  "short_name": "투두리",
+  "description": "조이의 스케줄 & 할 일 관리 앱",
+  "start_url": "/tuduri/",
+  "display": "standalone",
+  "background_color": "#F7F8FC",
+  "theme_color": "#6C63FF",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
